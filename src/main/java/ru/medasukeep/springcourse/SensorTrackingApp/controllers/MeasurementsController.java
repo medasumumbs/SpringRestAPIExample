@@ -11,12 +11,14 @@ import ru.medasukeep.springcourse.SensorTrackingApp.dto.MeasurementDTO;
 import ru.medasukeep.springcourse.SensorTrackingApp.models.Measurement;
 import ru.medasukeep.springcourse.SensorTrackingApp.services.MeasurementsService;
 import ru.medasukeep.springcourse.SensorTrackingApp.services.SensorsService;
+import ru.medasukeep.springcourse.SensorTrackingApp.util.GetMeasurementsResponse;
 import ru.medasukeep.springcourse.SensorTrackingApp.util.MeasurementDTOValidator;
 import ru.medasukeep.springcourse.SensorTrackingApp.util.MeasurementNotAddedException;
 import ru.medasukeep.springcourse.SensorTrackingApp.util.ErrorResponse;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/measurements")
@@ -32,6 +34,18 @@ public class MeasurementsController {
         this.measurementDTOValidator = measurementDTOValidator;
         this.modelMapper = modelMapper;
         this.measurementsService = measurementsService;
+    }
+
+    @GetMapping
+    public ResponseEntity<GetMeasurementsResponse> getMeasurements() {
+        return new ResponseEntity<>(
+                new GetMeasurementsResponse(measurementsService.findAll().stream().map(this::convertToMeasurementDTO).collect(Collectors.toList())),
+                HttpStatus.OK
+        );
+    }
+
+    private MeasurementDTO convertToMeasurementDTO(Measurement measurement) {
+        return modelMapper.map(measurement, MeasurementDTO.class);
     }
 
     @PostMapping("/add")

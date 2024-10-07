@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.medasukeep.springcourse.SensorTrackingApp.models.Measurement;
 import ru.medasukeep.springcourse.SensorTrackingApp.repositories.MeasurementsRepository;
-
+import java.util.List;
 import java.time.LocalDateTime;
 
 @Service
@@ -19,5 +19,8 @@ public class MeasurementsService {
     public void save(Measurement measurement) {
         measurement.setCreatedAt(LocalDateTime.now());
         measurementsRepository.save(measurement);
+    }
+    public List<Measurement> findAll() {
+        return measurementsRepository.findAll();
     }
 }
