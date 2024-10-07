@@ -11,6 +11,9 @@ public class GetMeasurementsResponse {
         this.measurementsList = measurementsList;
     }
 
+    public GetMeasurementsResponse() {
+    }
+
     public List<MeasurementDTO> getMeasurementsList() {
         return measurementsList;
     }
