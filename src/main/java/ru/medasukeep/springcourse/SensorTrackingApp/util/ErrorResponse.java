@@ -1,10 +1,10 @@
 package ru.medasukeep.springcourse.SensorTrackingApp.util;
 
-public class SensorErrorResponse {
+public class ErrorResponse {
     private String message;
     private long timestamp;
 
-    public SensorErrorResponse(String message, long timestamp) {
+    public ErrorResponse(String message, long timestamp) {
         this.message = message;
         this.timestamp = timestamp;
     }

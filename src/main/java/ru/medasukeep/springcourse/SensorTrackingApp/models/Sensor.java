@@ -1,6 +1,7 @@
 package ru.medasukeep.springcourse.SensorTrackingApp.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 /*
  Create table Sensor (
@@ -18,10 +19,11 @@ public class Sensor {
 
     public Sensor() {
     }
-
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "sensor")
+    private List<Measurement> measurementList;
     public int getId() {
         return id;
     }

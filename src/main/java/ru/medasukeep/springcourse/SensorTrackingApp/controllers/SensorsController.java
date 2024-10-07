@@ -11,7 +11,7 @@ import ru.medasukeep.springcourse.SensorTrackingApp.dto.SensorDTO;
 import ru.medasukeep.springcourse.SensorTrackingApp.models.Sensor;
 import ru.medasukeep.springcourse.SensorTrackingApp.services.SensorsService;
 import ru.medasukeep.springcourse.SensorTrackingApp.util.SensorDTOValidator;
-import ru.medasukeep.springcourse.SensorTrackingApp.util.SensorErrorResponse;
+import ru.medasukeep.springcourse.SensorTrackingApp.util.ErrorResponse;
 import ru.medasukeep.springcourse.SensorTrackingApp.util.SensorNotCreatedException;
 
 import javax.validation.Valid;
@@ -50,9 +50,9 @@ public class SensorsController {
         return modelMapper.map(sensorDTO, Sensor.class);
     }
     @ExceptionHandler
-    private ResponseEntity<SensorErrorResponse> handleException(SensorNotCreatedException exception) {
-        SensorErrorResponse sensorErrorResponse = new SensorErrorResponse(exception.getMessage(), System.currentTimeMillis());
-        return new ResponseEntity<>(sensorErrorResponse, HttpStatus.BAD_REQUEST);
+    private ResponseEntity<ErrorResponse> handleException(SensorNotCreatedException exception) {
+        ErrorResponse errorResponse = new ErrorResponse(exception.getMessage(), System.currentTimeMillis());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
 }
