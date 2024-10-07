@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.medasukeep.springcourse.SensorTrackingApp.dto.SensorDTO;
 import ru.medasukeep.springcourse.SensorTrackingApp.models.Sensor;
 import ru.medasukeep.springcourse.SensorTrackingApp.services.SensorsService;
+import ru.medasukeep.springcourse.SensorTrackingApp.util.SensorDTOValidator;
 import ru.medasukeep.springcourse.SensorTrackingApp.util.SensorErrorResponse;
 import ru.medasukeep.springcourse.SensorTrackingApp.util.SensorNotCreatedException;
 
@@ -22,13 +23,17 @@ public class SensorsController {
     private SensorsService sensorsService;
     private ModelMapper modelMapper;
 
+    private SensorDTOValidator sensorDTOValidator;
+
     @Autowired
-    public SensorsController(SensorsService sensorsService, ModelMapper modelMapper) {
+    public SensorsController(SensorsService sensorsService, ModelMapper modelMapper, SensorDTOValidator sensorDTOValidator) {
         this.sensorsService = sensorsService;
         this.modelMapper = modelMapper;
+        this.sensorDTOValidator = sensorDTOValidator;
     }
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid SensorDTO sensorDTO, BindingResult bindingResult) {
+        sensorDTOValidator.validate(sensorDTO, bindingResult);
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> fieldErrorList = bindingResult.getFieldErrors();
