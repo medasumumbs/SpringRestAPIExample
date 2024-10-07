@@ -43,6 +43,10 @@ public class MeasurementsController {
                 HttpStatus.OK
         );
     }
+    @GetMapping("/rainyDaysCount")
+    public ResponseEntity<String> getRainyDaysCount() {
+        return new ResponseEntity<>(measurementsService.getRainyDaysCount().toString(),HttpStatus.OK);
+    }
 
     private MeasurementDTO convertToMeasurementDTO(Measurement measurement) {
         return modelMapper.map(measurement, MeasurementDTO.class);

@@ -23,4 +23,7 @@ public class MeasurementsService {
     public List<Measurement> findAll() {
         return measurementsRepository.findAll();
     }
+    public Integer getRainyDaysCount() {
+        return measurementsRepository.countDistinctByRaining(true);
+    }
 }
