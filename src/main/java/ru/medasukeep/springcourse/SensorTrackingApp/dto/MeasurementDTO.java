@@ -4,6 +4,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 public class MeasurementDTO {
     @NotNull
@@ -14,6 +15,8 @@ public class MeasurementDTO {
     private Boolean raining;
     @NotNull(message = "Объект сенсора обязательно должен быть передан")
     private SensorDTO sensor;
+
+    private LocalDateTime createdAt;
 
     public double getValue() {
         return value;
@@ -37,5 +40,13 @@ public class MeasurementDTO {
 
     public void setSensor(SensorDTO sensor) {
         this.sensor = sensor;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

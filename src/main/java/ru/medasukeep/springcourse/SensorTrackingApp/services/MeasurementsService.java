@@ -21,7 +21,7 @@ public class MeasurementsService {
         measurementsRepository.save(measurement);
     }
     public List<Measurement> findAll() {
-        return measurementsRepository.findAll();
+        return measurementsRepository.findAllByOrderByCreatedAtAsc();
     }
     public Integer getRainyDaysCount() {
         return measurementsRepository.countDistinctByRaining(true);
